@@ -5,17 +5,20 @@ import {
   BaseLayoutComponent,
 } from './layouts';
 
+const COMPONENTS = [
+  BaseLayoutComponent,
+];
 
 @NgModule({
   declarations: [
-    BaseLayoutComponent,
+    ...COMPONENTS,
   ],
   imports: [
     CommonModule,
     RouterModule,
   ],
   exports: [
-    BaseLayoutComponent,
+    ...COMPONENTS,
   ]
 })
 export class SharedModule { }
