@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class OpenService {
@@ -8,7 +9,10 @@ export class OpenService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    const mock = environment.useMock;
+    console.log('MOCK: ', mock);
+  }
 
   categories() {
     return this.http
