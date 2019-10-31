@@ -5,6 +5,11 @@ import {
   BaseLayoutComponent,
 } from './layouts';
 
+const MODULES = [
+  CommonModule,
+  RouterModule,
+];
+
 const COMPONENTS = [
   BaseLayoutComponent,
 ];
@@ -14,11 +19,13 @@ const COMPONENTS = [
     ...COMPONENTS,
   ],
   imports: [
-    CommonModule,
-    RouterModule,
+    ...MODULES,
   ],
   exports: [
+    ...MODULES,
     ...COMPONENTS,
+  ],
+  providers: [
   ]
 })
 export class SharedModule { }

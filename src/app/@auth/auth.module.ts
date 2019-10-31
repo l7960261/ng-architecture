@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -14,8 +14,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ForgotPasswordComponent
   ],
   imports: [
-    CommonModule,
-    AuthRoutingModule
+    SharedModule,
+    AuthRoutingModule,
   ]
 })
 export class AuthModule { }

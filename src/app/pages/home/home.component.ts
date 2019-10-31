@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OpenService } from 'src/app/open.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  categories$ = this.openService.categories();
+
+  constructor(
+    private openService: OpenService,
+  ) { }
 
   ngOnInit() {
+  }
+
+  get count() {
+    return this.openService.count;
+  }
+
+  add() {
+    this.openService.add();
   }
 
 }
