@@ -1,5 +1,10 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
-import { OpenService } from './open.service';
+import { OpenService } from './services/open.service';
+import { environment } from 'src/environments/environment';
+import { OpenMockService } from './mock/open-mock.service';
+import { CONFIG, DefaultConfig } from './core.options';
+
+const useMock = environment.useMock;
 
 
 @NgModule({
@@ -19,7 +24,8 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        OpenService,
+        { provide: OpenService, useClass: useMock ? OpenMockService: OpenService, },
+        { provide: CONFIG, useValue: DefaultConfig },
       ]
     };
   }

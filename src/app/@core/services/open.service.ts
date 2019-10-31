@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { CONFIG, Config } from '@core/core.options';
 
 @Injectable()
 export class OpenService {
@@ -8,10 +8,10 @@ export class OpenService {
   count = 0;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(CONFIG) private config: Config,
   ) {
-    const mock = environment.useMock;
-    console.log('MOCK: ', mock);
+    console.log(config);
   }
 
   categories() {
