@@ -9,12 +9,18 @@ import { OpenService } from '@core/services/open.service';
 export class HomeComponent implements OnInit {
 
   categories$ = this.openService.categories();
+  uv$ = this.openService.uv();
 
   constructor(
     private openService: OpenService,
   ) { }
 
   ngOnInit() {
+    this.openService
+      .uv()
+      .subscribe(data => {
+        console.log(data);
+      })
   }
 
   get count() {
