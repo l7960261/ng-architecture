@@ -1,4 +1,16 @@
 <a [routerLink]="['/auth/login']">Login</a>
-<pre>
-  {{ uv$ | async | json }}
-</pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>縣市</th>
+      <th>區域</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of uv$ | async">
+      <td>{{ item.county }}</td>
+      <td>{{ item.siteName }}</td>
+    </tr>
+  </tbody>
+</table>

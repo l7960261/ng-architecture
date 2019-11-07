@@ -16,11 +16,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.openService
-      .uv()
-      .subscribe(data => {
-        console.log(data);
-      })
   }
 
   get count() {
