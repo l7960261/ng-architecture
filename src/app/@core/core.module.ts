@@ -3,9 +3,15 @@ import { OpenService } from './services/open.service';
 import { environment } from 'src/environments/environment';
 import { OpenMockService } from './mock/open-mock.service';
 import { CONFIG, DefaultConfig } from './core.options';
+// import { AuthModule } from '@auth/auth.module';
 
 const useMock = environment.useMock;
 
+const PROVIDERS = [
+  // ...AuthModule.forRoot().providers,
+  { provide: OpenService, useClass: useMock ? OpenMockService: OpenService, },
+  { provide: CONFIG, useValue: DefaultConfig },
+];
 
 @NgModule({
   declarations: [],
@@ -24,8 +30,7 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        { provide: OpenService, useClass: useMock ? OpenMockService: OpenService, },
-        { provide: CONFIG, useValue: DefaultConfig },
+        ...PROVIDERS,
       ]
     };
   }

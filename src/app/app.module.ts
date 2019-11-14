@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from '@core/core.module';
+import { AuthModule } from '@auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CoreModule } from '@core/core.module';
     HttpClientModule,
     HttpClientJsonpModule,
     AppRoutingModule,
+    AuthModule.forRoot(),
     CoreModule.forRoot(),
   ],
   providers: [

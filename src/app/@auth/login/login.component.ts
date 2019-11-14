@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OpenService } from '@core/services/open.service';
+import { AUTH_CONFIG, DefaultConfig } from '@auth/auth.options';
+import { AuthService } from '@auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private openService: OpenService,
     private formBuilder: FormBuilder,
+    @Inject(AUTH_CONFIG) private config: DefaultConfig,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -31,7 +35,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.status);
+    this.authService
+      .login(this.loginForm.value)
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
 }
