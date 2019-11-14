@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { OpenService } from '@core/services/open.service';
 import { AUTH_CONFIG, DefaultConfig } from '@auth/auth.options';
 import { AuthService } from '@auth/auth.service';
+import { get } from 'lodash';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,8 @@ import { AuthService } from '@auth/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', [Validators.required]],
+    username: ['', this.getValidators('username')],
+    password: ['', this.getValidators('password')],
   });
 
   constructor(
@@ -26,6 +27,24 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  getValidators(field: string) {
+    const fns = [];
+
+    const required = get(this.config, `form.login.${field}.required`);
+    const minLength = get(this.config, `form.login.${field}.minLength`);
+
+    if (required) {
+      fns.push(Validators.required);
+    }
+
+    if (minLength) {
+      fns.push(Validators.minLength(minLength));
+
+    }
+
+    return fns;
+  }
+
   get count() {
     return this.openService.count;
   }
@@ -35,11 +54,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService
-      .login(this.loginForm.value)
-      .subscribe(response => {
-        console.log(response);
-      });
+    if (this.loginForm.valid) {
+      this.authService
+        .login(this.loginForm.value)
+        .subscribe(response => {
+          console.log(response);
+        });
+    }
   }
 
 }

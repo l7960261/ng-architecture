@@ -3,8 +3,13 @@ import { InjectionToken } from '@angular/core';
 export const DEFAULT_CONFIG = {
   form: {
     login: {
-      username: {},
-      password: {},
+      username: {
+        required: true,
+        minLength: 3,
+      },
+      password: {
+        required: true,
+      },
       redirect: {
         url: '',
         delay: 1000,
