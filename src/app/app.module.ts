@@ -16,7 +16,15 @@ import { AuthModule } from '@auth/auth.module';
     HttpClientModule,
     HttpClientJsonpModule,
     AppRoutingModule,
-    AuthModule.forRoot(),
+    AuthModule.forRoot({
+      form: {
+        login: {
+          username: {
+            minLength: 2,
+          },
+        }
+      }
+    } as any),
     CoreModule.forRoot(),
   ],
   providers: [

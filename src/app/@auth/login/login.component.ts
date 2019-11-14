@@ -58,7 +58,11 @@ export class LoginComponent implements OnInit {
       this.authService
         .login(this.loginForm.value)
         .subscribe(response => {
-          console.log(response);
+          if (response.isSuccess) {
+            setTimeout(() => {
+              location.href = this.config.form.login.redirect.url;
+            }, this.config.form.login.redirect.delay);
+          }
         });
     }
   }
